@@ -1,12 +1,12 @@
 import BootScreen from "@/components/about/bootScreen";
 
 const bootLines = [
-  "Initializing system...",
-  "Checking memory...",
-  "Loading kernel modules...",
-  "Mounting filesystem...",
-  "Starting developer environment...",
-  "Booting karobia.dev shell...",
+  "Initializing profile operating system...",
+  "Loading professional identity modules...",
+  "Mounting work, stack, and impact directories...",
+  "Checking command-driven navigation...",
+  "Starting candidate brief service...",
+  "Opening Karobia workstation...",
   "System ready.",
 ];
 
