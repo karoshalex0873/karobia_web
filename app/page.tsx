@@ -1,13 +1,12 @@
 import BootScreen from "@/components/about/bootScreen";
 
 const bootLines = [
-  "Initializing profile operating system...",
-  "Loading professional identity modules...",
-  "Mounting work, stack, and impact directories...",
-  "Checking command-driven navigation...",
-  "Starting candidate brief service...",
-  "Opening Karobia workstation...",
-  "System ready.",
+  "Booting Karobia Terminal...",
+  "Checking window chrome, translucency, and focus state...",
+  "Loading portfolio modules: about, skills, education, projects...",
+  "Preparing quick actions: help, launch, coffee, contact...",
+  "Handing control to the shell...",
+  "Session ready.",
 ];
 
 export default function Page() {

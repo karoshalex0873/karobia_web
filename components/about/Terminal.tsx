@@ -44,23 +44,25 @@ const TYPEWRITER_CHAR_DELAY_MS = 12;
 const TYPEWRITER_LINE_DELAY_MS = 90;
 
 const introOutput = [
-  "Karobia Profile OS [interactive workstation]",
-  "Run `help`, `profile`, `work`, or `sudo hire me`.",
+  "Karobia Terminal [interactive portfolio workstation]",
+  "Run `help`, click a command chip, or type `about` to begin.",
 ];
 
 const commandOutput: Record<string, string[]> = {
   help: [
     "Karobia Profile OS command index",
-    "  profile                 open professional profile",
-    "  stack                   inspect engineering toolkit",
-    "  work                    mount selected work areas",
+    "  about                   open professional profile",
+    "  skills                  inspect engineering toolkit",
+    "  education               print growth timeline",
+    "  projects                mount selected work areas",
     "  impact                  show product value report",
-    "  learning                print growth timeline",
-    "  launcher                open command palette",
+    "  launch                  open command palette",
+    "  contact                 prepare a direct intro",
+    "  coffee                  prepare coffee chat context",
     "  sudo hire me            generate candidate brief",
     "  sudo brief --role frontend",
-    "  sudo coffee             prepare coffee chat email",
-    "  sudo send-message       prepare direct message email",
+    "  sudo coffee             open coffee chat email",
+    "  sudo send-message       open direct message email",
     "  clear                   clear the active terminal",
   ],
   profile: [
@@ -72,7 +74,7 @@ const commandOutput: Record<string, string[]> = {
   ],
   about: [
     "Alex Karobia",
-    "Software engineer focused on polished web/mobile interfaces,",
+    "Software engineer focused on polished web and mobile interfaces,",
     "practical product systems, and hardware-aware software.",
   ],
   stack: [
@@ -115,6 +117,10 @@ const commandOutput: Record<string, string[]> = {
     "Communicate tradeoffs early so teams can move without losing quality.",
   ],
   launcher: [
+    "Command palette ready.",
+    "Choose a profile command or keep typing in the shell.",
+  ],
+  launch: [
     "Command palette ready.",
     "Choose a profile command or keep typing in the shell.",
   ],
@@ -224,7 +230,7 @@ function panelForCommand(command: string): PanelName | undefined {
     return "impact";
   }
 
-  if (command === "launcher" || command === "explore") {
+  if (command === "launcher" || command === "launch" || command === "explore") {
     return "explore";
   }
 
@@ -283,7 +289,7 @@ function getCommandOutput(command: string): CommandResult {
 
 function outputColor(tone: HistoryEntry["tone"]) {
   if (tone === "success") {
-    return "text-emerald-200/90";
+    return "text-emerald-100/90";
   }
 
   if (tone === "error") {
@@ -291,10 +297,10 @@ function outputColor(tone: HistoryEntry["tone"]) {
   }
 
   if (tone === "muted") {
-    return "text-zinc-500";
+    return "text-zinc-500/70";
   }
 
-  return "text-zinc-300";
+  return "text-zinc-300/88";
 }
 
 export default function Terminal({ onCommandRun }: TerminalProps) {
@@ -522,33 +528,58 @@ export default function Terminal({ onCommandRun }: TerminalProps) {
   return (
     <motion.section
       key="terminal"
-      className="relative h-full min-h-[38rem] cursor-text overflow-hidden border border-zinc-700/70 bg-[#05070A] font-[JetBrains_Mono,ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace] text-zinc-100 shadow-[0_26px_80px_rgba(0,0,0,0.48)]"
+      className="relative h-136 cursor-text overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,20,26,0.94),rgba(5,7,10,0.985))] font-[SFMono-Regular,Menlo,Monaco,Consolas,monospace] text-zinc-100 shadow-[0_28px_90px_rgba(0,0,0,0.45)] sm:h-152 lg:min-h-152"
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       onClick={() => inputRef.current?.focus()}
     >
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(45,212,191,0.08),transparent_28%),radial-gradient(circle_at_82%_0%,rgba(251,191,36,0.055),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_22%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(229,231,235,0.022)_1px,transparent_1px)] bg-size-[100%_4px] opacity-20" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(34,197,94,0.08),transparent_28%),radial-gradient(circle_at_82%_0%,rgba(45,212,191,0.08),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.02),transparent_22%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.018)_1px,transparent_1px)] bg-size-[100%_4px] opacity-20" />
 
       <div className="relative flex h-full w-full">
-        <div className="flex w-full flex-col overflow-hidden bg-[linear-gradient(180deg,rgba(10,14,22,0.94),rgba(5,7,10,0.99))]">
-          <div className="h-px w-full bg-[linear-gradient(90deg,transparent,rgba(16,185,129,0.5),rgba(45,212,191,0.65),rgba(251,191,36,0.42),transparent)] opacity-80" />
+        <div className="flex w-full flex-col overflow-hidden rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(10,14,19,0.95),rgba(4,6,8,0.99))]">
+          <div className="h-px w-full bg-[linear-gradient(90deg,transparent,rgba(16,185,129,0.45),rgba(45,212,191,0.5),rgba(148,163,184,0.2),transparent)] opacity-80" />
 
-          <header className="flex items-center justify-between gap-4 border-b border-zinc-700/60 bg-[#111827] px-4 py-2.5 text-[11px] tracking-[0.16em] text-zinc-400 uppercase sm:px-5">
-            <div className="flex items-center gap-3 tracking-normal text-[12px] uppercase">
+          <header className="flex items-center justify-between gap-4 border-b border-white/8 bg-black/18 px-4 py-3 text-[10px] uppercase tracking-[0.16em] text-zinc-500 sm:px-5">
+            <div className="flex items-center gap-3 tracking-normal text-[12px] uppercase text-zinc-300">
               <span className="inline-flex gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f56] shadow-[0_0_10px_rgba(255,95,86,0.35)]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e] shadow-[0_0_10px_rgba(255,189,46,0.28)]" />
-                <span className="h-2.5 w-2.5 rounded-full bg-[#27c93f] shadow-[0_0_10px_rgba(39,201,63,0.32)]" />
+                <span className="h-3 w-3 rounded-full bg-[#ff5f57] shadow-[0_0_16px_rgba(255,95,87,0.35)]" />
+                <span className="h-3 w-3 rounded-full bg-[#febc2e] shadow-[0_0_16px_rgba(254,188,46,0.28)]" />
+                <span className="h-3 w-3 rounded-full bg-[#28c840] shadow-[0_0_16px_rgba(40,200,64,0.32)]" />
               </span>
-              <span className="text-cyan-200/85">alex@profile-os:/workspace</span>
+              <span className="max-w-44 truncate text-zinc-200/85 sm:max-w-none">
+                alex@karobia — terminal
+              </span>
             </div>
-            <span className="hidden text-zinc-500 sm:inline">bash - professional mode</span>
+
+            <span className="hidden text-zinc-500 sm:inline">macOS shell · professional mode</span>
           </header>
 
           <div className="flex min-h-0 flex-1 flex-col px-4 py-4 sm:px-5 sm:py-5">
-            <div className="flex-1 space-y-5 overflow-y-auto pb-6 text-sm leading-7 text-zinc-200 sm:text-[15px]">
+            <div className="mb-4 flex flex-wrap items-center gap-2 border-b border-white/8 pb-4 text-[11px] uppercase tracking-[0.16em] text-zinc-500">
+              {[
+                ["about", "profile"],
+                ["skills", "stack"],
+                ["education", "learning"],
+                ["projects", "work"],
+                ["launch", "launcher"],
+                ["coffee", "coffee"],
+                ["contact", "contact"],
+                ["help", "help"],
+              ].map(([label, command]) => (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => runCommand(command)}
+                  className="rounded-full border border-white/10 bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-[11px] uppercase tracking-[0.16em] text-zinc-300 transition hover:border-emerald-300/30 hover:bg-[rgba(52,211,153,0.08)] hover:text-emerald-100"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex-1 space-y-4 overflow-y-auto pb-5 text-[13px] leading-6 text-zinc-200 sm:space-y-5 sm:text-[15px] sm:leading-7">
               {history.map((entry, index) => {
                 const panel = renderPanel(entry);
 
@@ -559,9 +590,9 @@ export default function Terminal({ onCommandRun }: TerminalProps) {
                   >
                     {entry.command ? (
                       <p>
-                        <span className="text-emerald-300">{PROMPT}</span>
-                        <span className="text-zinc-500">:~$ </span>
-                        <span className="text-zinc-100">{entry.command}</span>
+                        <span className="text-emerald-300/90">{PROMPT}</span>
+                        <span className="text-zinc-500"> ~ % </span>
+                        <span className="text-zinc-100/95">{entry.command}</span>
                       </p>
                     ) : null}
 
@@ -581,21 +612,22 @@ export default function Terminal({ onCommandRun }: TerminalProps) {
                 );
               })}
 
-              <form onSubmit={handleSubmit} className="flex min-w-0 items-center pt-1">
+              <form onSubmit={handleSubmit} className="flex min-w-0 items-center pt-1 text-[12px] sm:text-sm">
                 <label htmlFor="terminal-input" className="shrink-0">
-                  <span className="text-emerald-300">{PROMPT}</span>
-                  <span className="text-zinc-500">:~$ </span>
+                  <span className="text-emerald-300/90">{PROMPT}</span>
+                  <span className="text-zinc-500"> ~ % </span>
                 </label>
                 <input
                   ref={inputRef}
                   id="terminal-input"
                   value={input}
                   onChange={(event) => setInput(event.target.value)}
-                  className="min-w-0 flex-1 bg-transparent text-zinc-100 caret-cyan-200 outline-none"
+                  className="min-w-0 flex-1 bg-transparent text-zinc-100 caret-emerald-300 outline-none placeholder:text-zinc-600"
                   autoComplete="off"
                   autoCapitalize="none"
                   spellCheck={false}
                   aria-label="Terminal command"
+                  placeholder="type a command"
                 />
               </form>
               <div ref={scrollRef} />

@@ -29,18 +29,18 @@ const metrics = [
 
 function toneClasses(tone: TerminalTone) {
   if (tone === "success") {
-    return "border-emerald-400/25 bg-emerald-400/[0.06] text-emerald-50/90";
+    return "border-emerald-300/20 bg-emerald-300/[0.06] text-emerald-50/90";
   }
 
   if (tone === "error") {
-    return "border-red-400/25 bg-red-400/[0.06] text-red-50/90";
+    return "border-red-400/20 bg-red-400/[0.06] text-red-50/90";
   }
 
   if (tone === "muted") {
-    return "border-zinc-400/10 bg-white/[0.025] text-zinc-300/55";
+    return "border-zinc-400/10 bg-white/[0.03] text-zinc-300/60";
   }
 
-  return "border-cyan-300/18 bg-cyan-300/[0.045] text-zinc-100/82";
+  return "border-cyan-300/16 bg-cyan-300/[0.05] text-zinc-100/84";
 }
 
 function SectionShell({
@@ -55,25 +55,27 @@ function SectionShell({
   children: React.ReactNode;
 }) {
   return (
-    <section className="border border-zinc-700/55 bg-[#080B10]/88">
-      <div className="border-b border-zinc-700/55 px-4 py-3">
-        <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-emerald-300/75">
+    <section className="overflow-hidden rounded-2xl border border-white/8 bg-white/[0.035] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] backdrop-blur-sm">
+      <div className="border-b border-white/8 px-4 py-4 sm:px-5">
+        <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-emerald-300/75">
           {eyebrow}
         </p>
-        <h3 className="mt-1 text-lg leading-tight text-zinc-50">{title}</h3>
-        <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+        <h3 className="mt-1 text-base leading-tight text-zinc-50 sm:text-lg">
+          {title}
+        </h3>
+        <p className="mt-2 max-w-2xl text-[13px] leading-6 text-zinc-400 sm:text-sm">
           {description}
         </p>
       </div>
-      <div className="p-4">{children}</div>
+      <div className="p-4 sm:p-5">{children}</div>
     </section>
   );
 }
 
 export function TerminalTextBlock({ lines, tone = "system" }: TextBlockProps) {
   return (
-    <div className={`border px-4 py-3 ${toneClasses(tone)}`}>
-      <div className="space-y-1 text-[13px] leading-6 sm:text-sm">
+    <div className={`rounded-2xl border px-4 py-4 sm:px-5 ${toneClasses(tone)}`}>
+      <div className="space-y-1 text-[12px] leading-6 sm:text-sm">
         {lines.map((line, index) => (
           <p key={`${line}-${index}`} className="whitespace-pre-wrap">
             {line}
@@ -91,10 +93,10 @@ export function AboutSection({ lines }: SectionProps) {
     <SectionShell
       eyebrow="profile.exec"
       title={nameLine}
-      description="A concise professional profile for teams that need a builder who can reason about product, implementation, and finish."
+      description="A concise profile for teams that need a builder who can reason about product, implementation, and finish."
     >
-      <div className="grid gap-4 md:grid-cols-[9rem_minmax(0,1fr)]">
-        <div className="border border-emerald-300/20 bg-emerald-300/[0.045] p-4">
+        <div className="grid gap-4 md:grid-cols-[10rem_minmax(0,1fr)]">
+          <div className="rounded-2xl border border-emerald-300/18 bg-emerald-300/5 p-4">
           <p className="text-3xl font-semibold tracking-[0.08em] text-emerald-200">
             AK
           </p>
@@ -102,7 +104,7 @@ export function AboutSection({ lines }: SectionProps) {
             software engineer
           </p>
         </div>
-        <div className="space-y-3 text-sm leading-6 text-zinc-300">
+        <div className="space-y-3 text-[13px] leading-6 text-zinc-300 sm:text-sm">
           {detailLines.map((line, index) => (
             <p key={`${line}-${index}`}>{line}</p>
           ))}
@@ -127,12 +129,14 @@ export function SkillsSection({ lines }: SectionProps) {
           return (
             <div
               key={`${label}-${index}`}
-              className="border border-zinc-700/60 bg-black/24 px-4 py-3"
+              className="rounded-2xl border border-white/8 bg-black/24 px-4 py-4 sm:px-5"
             >
               <p className="text-[11px] uppercase tracking-[0.16em] text-cyan-200/75">
                 {label.trim()}
               </p>
-              <p className="mt-2 text-sm leading-6 text-zinc-300">{value}</p>
+              <p className="mt-2 text-[13px] leading-6 text-zinc-300 sm:text-sm">
+                {value}
+              </p>
             </div>
           );
         })}
@@ -152,12 +156,14 @@ export function EducationSection({ lines }: SectionProps) {
         {lines.map((line, index) => (
           <div
             key={`${line}-${index}`}
-            className="grid grid-cols-[3rem_minmax(0,1fr)] border border-zinc-700/55 bg-black/20"
+            className="grid grid-cols-[2.75rem_minmax(0,1fr)] rounded-2xl border border-white/8 bg-black/20"
           >
-            <div className="border-r border-zinc-700/55 px-3 py-3 text-xs text-emerald-300/80">
+            <div className="border-r border-white/8 px-3 py-3 text-xs text-emerald-300/80">
               {String(index + 1).padStart(2, "0")}
             </div>
-            <p className="px-4 py-3 text-sm leading-6 text-zinc-300">{line}</p>
+            <p className="px-3 py-3 text-[13px] leading-6 text-zinc-300 sm:px-4 sm:text-sm">
+              {line}
+            </p>
           </div>
         ))}
       </div>
@@ -180,12 +186,12 @@ export function ProjectsSection({ lines }: SectionProps) {
           return (
             <div
               key={`${slug}-${index}`}
-              className="border border-zinc-700/60 bg-[#0B1018] px-4 py-3"
+              className="rounded-2xl border border-white/8 bg-[#0B1018] px-4 py-4 sm:px-5"
             >
               <p className="text-[11px] uppercase tracking-[0.16em] text-emerald-300/75">
                 {slug}
               </p>
-              <p className="mt-2 text-sm leading-6 text-zinc-300">
+              <p className="mt-2 text-[13px] leading-6 text-zinc-300 sm:text-sm">
                 {description}
               </p>
             </div>
@@ -207,10 +213,12 @@ export function ImpactSection({ lines }: SectionProps) {
         {lines.map((line, index) => (
           <div
             key={`${line}-${index}`}
-            className="border border-amber-300/20 bg-amber-300/[0.045] p-4"
+            className="rounded-2xl border border-amber-300/18 bg-amber-300/5 p-4 sm:p-5"
           >
             <p className="text-[11px] text-amber-200/75">{metrics[index]?.[0]}</p>
-            <p className="mt-2 text-sm leading-6 text-zinc-200">{line}</p>
+            <p className="mt-2 text-[13px] leading-6 text-zinc-200 sm:text-sm">
+              {line}
+            </p>
           </div>
         ))}
       </div>
@@ -220,9 +228,12 @@ export function ImpactSection({ lines }: SectionProps) {
 
 export function InteractiveLauncher({ onCommandSelect }: InteractiveLauncherProps) {
   const commands = [
-    "profile",
-    "stack",
-    "work",
+    "about",
+    "skills",
+    "education",
+    "projects",
+    "launch",
+    "help",
     "impact",
     "sudo hire me",
     "sudo brief --role frontend",
@@ -242,7 +253,7 @@ export function InteractiveLauncher({ onCommandSelect }: InteractiveLauncherProp
             key={command}
             type="button"
             onClick={() => onCommandSelect(command)}
-            className="border border-zinc-700/70 bg-black/24 px-3 py-2 text-left text-[12px] text-zinc-300 transition hover:border-emerald-300/35 hover:bg-emerald-300/[0.06] hover:text-emerald-100"
+            className="rounded-2xl border border-white/8 bg-black/24 px-4 py-3 text-left text-[12px] text-zinc-300 transition hover:border-emerald-300/35 hover:bg-emerald-300/8 hover:text-emerald-100"
           >
             $ {command}
           </button>
@@ -263,9 +274,11 @@ export function CvSection({ lines }: SectionProps) {
         {lines.map((line, index) => (
           <div
             key={`${line}-${index}`}
-            className="border border-emerald-300/18 bg-emerald-300/[0.04] px-4 py-3"
+            className="rounded-2xl border border-emerald-300/18 bg-emerald-300/5 px-4 py-4 sm:px-5"
           >
-            <p className="text-sm leading-6 text-zinc-200">{line}</p>
+            <p className="text-[13px] leading-6 text-zinc-200 sm:text-sm">
+              {line}
+            </p>
           </div>
         ))}
       </div>
@@ -289,7 +302,7 @@ export function ActionSection({
         <TerminalTextBlock lines={lines} tone="success" />
         <a
           href={href}
-          className="inline-flex border border-emerald-300/28 bg-emerald-300/[0.08] px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-emerald-200 transition hover:bg-emerald-300/[0.14]"
+              className="inline-flex rounded-full border border-emerald-300/28 bg-emerald-300/8 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-emerald-200 transition hover:bg-emerald-300/14"
         >
           {actionLabel}
         </a>

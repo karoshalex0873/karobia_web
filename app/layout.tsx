@@ -4,12 +4,12 @@ import "./globals.css";
 const siteUrl = "https://karobia.dev";
 const siteName = "Karobia Dev";
 const siteDescription =
-  "Alex Karobia is a software engineer and AI/ML enthusiast building modern web applications, intelligent tools, and practical technology projects.";
+  "Alex Karobia is a software engineer building polished terminal-driven portfolio experiences, modern web interfaces, and practical product software.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Karobia Dev - Portfolio",
+    default: "Karobia Dev",
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Karobia Dev - Alex Karobia Portfolio",
+    title: "Karobia Dev",
     description: siteDescription,
     url: "/",
     siteName,
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Karobia Dev - Alex Karobia Portfolio",
+    title: "Karobia Dev",
     description: siteDescription,
     images: ["/opengraph-image"],
   },
@@ -77,7 +77,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+        {children}
+      </body>
     </html>
   );
 }
